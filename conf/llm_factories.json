@@ -3132,6 +3132,20 @@
                     "is_tools": true
                 },
                 {
+                    "llm_name": "claude-3-5-haiku-20241022",
+                    "tags": "LLM,IMAGE2TEXT,200k",
+                    "max_tokens": 8192,
+                    "model_type": "image2text",
+                    "is_tools": true
+                },
+                {
+                    "llm_name": "claude-3-5-haiku-20241022",
+                    "tags": "LLM,IMAGE2TEXT,200k",
+                    "max_tokens": 8192,
+                    "model_type": "chat",
+                    "is_tools": true
+                },
+                {
                     "llm_name": "claude-3-5-sonnet-20241022",
                     "tags": "LLM,IMAGE2TEXT,200k",
                     "max_tokens": 204800,
