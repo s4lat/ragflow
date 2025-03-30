@@ -35,6 +35,15 @@ services:
       - ragflow
     restart: on-failure
 
+  ollama:
+    container_name: ragflow-ollama
+    build:
+      context: ollama/
+    networks:
+      - ragflow
+    ports:
+      - "10017:11434"
+
   infinity:
     container_name: ragflow-infinity
     profiles:
