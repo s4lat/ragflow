@@ -598,7 +598,7 @@ class SberEmbed(Base):
             em_batch_result[em["index"]] = em["embedding"]
             tokens_count += em["usage"]["prompt_tokens"]
 
-        return np.array(em_batch_result), tokens_count
+        return np.array(em_batch_result[0]), tokens_count
 
 class GeminiEmbed(Base):
     def __init__(self, key, model_name='models/text-embedding-004',
