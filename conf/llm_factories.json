@@ -927,7 +927,7 @@
                 {
                     "llm_name": "Embeddings",
                     "tags": "TEXT EMBEDDING",
-                    "max_tokens": 512,
+                    "max_tokens": 448,
                     "model_type": "embedding"
                 }
                 ]
