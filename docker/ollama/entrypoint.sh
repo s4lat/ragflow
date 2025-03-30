@@ -2,6 +2,7 @@
 
 echo "Starting Ollama server..."
 ollama serve &
+SERVE_PID=$!
 
 
 echo "Waiting for Ollama server to be active..."
@@ -11,3 +12,4 @@ done
 
 
 ollama pull nomic-embed-text
+wait $SERVE_PID
