@@ -918,6 +918,21 @@
             "llm": []
         },
         {
+            "name": "Sber",
+            "logo": "",
+            "tags": "TEXT EMBEDDING",
+            "status": "1",
+            "llm":
+                [
+                {
+                    "llm_name": "Embeddings",
+                    "tags": "TEXT EMBEDDING",
+                    "max_tokens": 512,
+                    "model_type": "embedding"
+                }
+                ]
+        },
+        {
             "name": "Gemini",
             "logo": "",
             "tags": "LLM,TEXT EMBEDDING,IMAGE2TEXT",

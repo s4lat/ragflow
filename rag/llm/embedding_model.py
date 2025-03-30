@@ -13,9 +13,12 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #
+import datetime
 import logging
 import re
 import threading
+import uuid
+
 import requests
 from huggingface_hub import snapshot_download
 from zhipuai import ZhipuAI
@@ -32,6 +35,10 @@ from api.utils.file_utils import get_home_cache_dir
 from rag.utils import num_tokens_from_string, truncate
 import google.generativeai as genai
 import json
+
+# from ragflow.api import settings
+# from ragflow.api.utils.file_utils import get_home_cache_dir
+# from ragflow.rag.utils import num_tokens_from_string, truncate
 
 
 class Base(ABC):
@@ -518,6 +525,80 @@ class BedrockEmbed(Base):
 
         return np.array(embeddings), token_count
 
+class SberEmbed(Base):
+    def __init__(self, key, model_name='Embeddings', **kwargs):
+        self.key = key
+        self.model_name = model_name
+        self.last_auth_token_refresh = None
+        self.auth_token = None
+
+    def update_auth_token(self):
+        if self.auth_token is not None and datetime.datetime.now() - self.last_auth_token_refresh < datetime.timedelta(minutes=20):
+            return
+
+        resp = requests.post("https://ngw.devices.sberbank.ru:9443/api/v2/oauth",
+                            headers={
+                                "Authorization": "Basic %s" % self.key,
+                                "Content-type": "application/x-www-form-urlencoded",
+                                'Accept': 'application/json',
+                                'RqUID': str(uuid.uuid4()),
+                            },
+                            data={"scope": 'GIGACHAT_API_PERS'},
+                            verify=False)
+        if resp.status_code != 200:
+            raise Exception('Failed to get auth token: %d: %s' % (resp.status_code, resp.text))
+
+        self.auth_token = resp.json()['access_token']
+        self.last_auth_token_refresh = datetime.datetime.now()
+
+    def encode(self, texts: list):
+        self.update_auth_token()
+
+        texts = [truncate(text, 512) for text in texts]
+        batch_size = 16
+        embeddings = []
+        tokens_count = 0
+        for i in range(0, len(texts), batch_size):
+            resp = requests.post("https://gigachat.devices.sberbank.ru/api/v1/embeddings",
+                                  headers={"Authorization": "Bearer %s" % self.auth_token, "Content-type": "application/json"},
+                                  data=json.dumps({
+                                      "model": self.model_name,
+                                      "input": texts[i:i + batch_size],
+                                  }), verify=False)
+            if resp.status_code != 200:
+                raise Exception('Failed to get embeddings: %s' % resp.text)
+
+            em_batch = resp.json()['data']
+            em_batch_result = [[] for _ in range(len(em_batch))]
+            for em in em_batch:
+                em_batch_result[em["index"]] = em["embedding"]
+                tokens_count += em["usage"]["prompt_tokens"]
+
+            embeddings.extend(em_batch_result)
+        return np.array(embeddings), tokens_count
+
+
+    def encode_queries(self, text):
+        self.update_auth_token()
+        text = truncate(text, 512)
+        resp = requests.post("https://gigachat.devices.sberbank.ru/api/v1/embeddings",
+                             headers={"Authorization": "Bearer %s" % self.auth_token,
+                                      "Content-type": "application/json"},
+                             data=json.dumps({
+                                 "model": self.model_name,
+                                 "input": text,
+                             }), verify=False)
+        if resp.status_code != 200:
+            raise Exception('Failed to get embeddings: %s' % resp.text)
+
+        tokens_count = 0
+        em_batch = resp.json()['data']
+        em_batch_result = [[] for _ in range(len(em_batch))]
+        for em in em_batch:
+            em_batch_result[em["index"]] = em["embedding"]
+            tokens_count += em["usage"]["prompt_tokens"]
+
+        return np.array(em_batch_result), tokens_count
 
 class GeminiEmbed(Base):
     def __init__(self, key, model_name='models/text-embedding-004',

@@ -45,6 +45,7 @@ from .embedding_model import (
     HuggingFaceEmbed,
     VolcEngineEmbed,
     GPUStackEmbed,
+    SberEmbed,
 )
 from .chat_model import (
     GptTurbo,
@@ -164,6 +165,7 @@ EmbeddingModel = {
     "Mistral": MistralEmbed,
     "Bedrock": BedrockEmbed,
     "Gemini": GeminiEmbed,
+    "Sber": SberEmbed,
     "NVIDIA": NvidiaEmbed,
     "LM-Studio": LmStudioEmbed,
     "OpenAI-API-Compatible": OpenAI_APIEmbed,
