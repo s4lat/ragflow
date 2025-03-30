@@ -1,4 +1,6 @@
 FROM ollama/ollama
 
-RUN #ollama pull nomic-embed-text
-ENTRYPOINT ["ollama", "serve"]
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh"]
