@@ -554,7 +554,7 @@ class SberEmbed(Base):
     def encode(self, texts: list):
         self.update_auth_token()
 
-        texts = [truncate(text, 512) for text in texts]
+        texts = [truncate(text, 448) for text in texts]
         batch_size = 16
         embeddings = []
         tokens_count = 0
@@ -580,7 +580,7 @@ class SberEmbed(Base):
 
     def encode_queries(self, text):
         self.update_auth_token()
-        text = truncate(text, 512)
+        text = truncate(text, 448)
         resp = requests.post("https://gigachat.devices.sberbank.ru/api/v1/embeddings",
                              headers={"Authorization": "Bearer %s" % self.auth_token,
                                       "Content-type": "application/json"},
