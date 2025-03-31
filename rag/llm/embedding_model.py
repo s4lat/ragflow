@@ -36,9 +36,12 @@ from rag.utils import num_tokens_from_string, truncate
 import google.generativeai as genai
 import json
 
+# uncomment for develop new embedding model
 # from ragflow.api import settings
 # from ragflow.api.utils.file_utils import get_home_cache_dir
 # from ragflow.rag.utils import num_tokens_from_string, truncate
+from rag.llm.vectorization_markup_api import vector_pb2_grpc, vector_pb2
+import grpc
 
 
 class Base(ABC):
@@ -524,6 +527,34 @@ class BedrockEmbed(Base):
         embeddings.extend(model_response["embedding"])
 
         return np.array(embeddings), token_count
+
+class ScoutieEmbed(Base):
+    def __init__(self, base_url, key="", **kwargs):
+        self.key = key
+        self.base_url = base_url
+        self.channel = grpc.insecure_channel(self.base_url)
+        self.service = vector_pb2_grpc.VectorStub(self.channel)
+
+    def encode(self, texts: list[str]):
+        texts = [truncate(text, 256) for text in texts]
+        tokens_count = sum(num_tokens_from_string(text) for text in texts)
+        batch_size = 128
+        ress = []
+        for i in range(0, len(texts), batch_size):
+            resp = self.service.GetVector(vector_pb2.Texts(texts=texts[i:i + batch_size]))
+            for vector in resp.vectors:
+                ress.append(vector.data)
+
+        return np.array(ress), tokens_count
+
+    def encode_queries(self, text):
+        text = truncate(text, 256)
+        ress = []
+        resp = self.service.GetVector(vector_pb2.Texts(texts=[text,]))
+        for vector in resp.vectors:
+            ress.append(vector.data)
+
+        return np.array(ress[0]), num_tokens_from_string(text)
 
 class SberEmbed(Base):
     def __init__(self, key, model_name='Embeddings', **kwargs):

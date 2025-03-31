@@ -1,4 +1,13 @@
 services:
+  embedding:
+    container_name: ragflow-embedding
+    build:
+      context: ./vectorization_markup/
+
+    networks:
+      - ragflow
+    restart: on-failure
+
   es01:
     container_name: ragflow-es-01
     profiles:

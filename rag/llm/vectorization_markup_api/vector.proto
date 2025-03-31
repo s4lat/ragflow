@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package vector;
+
+service Vector {
+  rpc GetVector (Texts) returns (Data) {}
+}
+message Texts {
+  repeated string texts = 1;
+}
+
+message TextVector{
+  repeated float data = 1;
+}
+message Data {
+  repeated TextVector vectors = 1;
+}

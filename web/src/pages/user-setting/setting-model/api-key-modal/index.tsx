@@ -19,7 +19,7 @@ type FieldType = {
   group_id?: string;
 };
 
-const modelsWithBaseUrl = [LLMFactory.OpenAI, LLMFactory.AzureOpenAI];
+const modelsWithBaseUrl = [LLMFactory.OpenAI, LLMFactory.AzureOpenAI, LLMFactory.Scoutie];
 
 const ApiKeyModal = ({
   visible,
