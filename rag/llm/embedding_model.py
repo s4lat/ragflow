@@ -529,8 +529,9 @@ class BedrockEmbed(Base):
         return np.array(embeddings), token_count
 
 class ScoutieEmbed(Base):
-    def __init__(self, base_url, key="", **kwargs):
+    def __init__(self, key, model_name="vectorization-markup", base_url="embedding:5055", **kwargs):
         self.key = key
+        self.model_name = model_name
         self.base_url = base_url
         self.channel = grpc.insecure_channel(self.base_url)
         self.service = vector_pb2_grpc.VectorStub(self.channel)
