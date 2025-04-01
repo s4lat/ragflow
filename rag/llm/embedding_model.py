@@ -537,9 +537,9 @@ class ScoutieEmbed(Base):
         self.service = vector_pb2_grpc.VectorStub(self.channel)
 
     def encode(self, texts: list[str]):
-        texts = [truncate(text, 256) for text in texts]
+        texts = [truncate(text, 512) for text in texts]
         tokens_count = sum(num_tokens_from_string(text) for text in texts)
-        batch_size = 128
+        batch_size = 32
         ress = []
         for i in range(0, len(texts), batch_size):
             resp = self.service.GetVector(vector_pb2.Texts(texts=texts[i:i + batch_size]))
@@ -549,7 +549,7 @@ class ScoutieEmbed(Base):
         return np.array(ress), tokens_count
 
     def encode_queries(self, text):
-        text = truncate(text, 256)
+        text = truncate(text, 512)
         ress = []
         resp = self.service.GetVector(vector_pb2.Texts(texts=[text,]))
         for vector in resp.vectors:
