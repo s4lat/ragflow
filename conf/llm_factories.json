@@ -933,6 +933,21 @@
                 ]
         },
         {
+            "name": "Scoutie",
+            "logo": "",
+            "tags": "TEXT EMBEDDING",
+            "status": "1",
+            "llm":
+                [
+                {
+                    "llm_name": "vectorization-markup",
+                    "tags": "TEXT EMBEDDING",
+                    "max_tokens": 64,
+                    "model_type": "embedding"
+                }
+                ]
+        },
+        {
             "name": "Gemini",
             "logo": "",
             "tags": "LLM,TEXT EMBEDDING,IMAGE2TEXT",
