@@ -15,8 +15,8 @@ logger.addHandler(console_handler)
 
 class Vectorizer(object):
     def __init__(self):
-        self.tokenizer = AutoTokenizer.from_pretrained("cointegrated/LaBSE-en-ru")
-        self.model = AutoModel.from_pretrained("cointegrated/LaBSE-en-ru")
+        self.tokenizer = AutoTokenizer.from_pretrained("cointegrated/LaBSE-en-ru", force_download=True)
+        self.model = AutoModel.from_pretrained("cointegrated/LaBSE-en-ru", force_download=True)
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         logger.debug("init success " + str(self.device))
 
