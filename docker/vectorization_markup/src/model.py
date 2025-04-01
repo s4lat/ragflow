@@ -1,9 +1,7 @@
 import torch
-from transformers import AutoTokenizer, AutoModel, cache
+from transformers import AutoTokenizer, AutoModel
 from typing import List
 import logging
-
-cache.clear()
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
