@@ -4,7 +4,7 @@ tokenizers==0.10.1
 requests
 tqdm
 six
-transformers==4.6.0
+transformers[torch]==4.50.0
 grpcio
 grpcio-tools
 numpy==1.21.4
