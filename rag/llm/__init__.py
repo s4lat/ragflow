@@ -46,6 +46,7 @@ from .embedding_model import (
     VolcEngineEmbed,
     GPUStackEmbed,
     SberEmbed,
+    ScoutieEmbed,
 )
 from .chat_model import (
     GptTurbo,
@@ -166,6 +167,7 @@ EmbeddingModel = {
     "Bedrock": BedrockEmbed,
     "Gemini": GeminiEmbed,
     "Sber": SberEmbed,
+    "Scoutie": ScoutieEmbed,
     "NVIDIA": NvidiaEmbed,
     "LM-Studio": LmStudioEmbed,
     "OpenAI-API-Compatible": OpenAI_APIEmbed,
