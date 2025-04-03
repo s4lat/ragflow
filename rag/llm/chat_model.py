@@ -1405,13 +1405,12 @@ class SberGigaChat(Base):
         self.model_name = model_name
 
     def chat(self, system, history, gen_conf):
-        if system:
-            self.system = SystemMessage(system)
-
-        if "temperature" in gen_conf and float(gen_conf["temperature"]) >= 0.0:
+        if "temperature" in gen_conf and float(gen_conf["temperature"]):
             self.giga.temperature = gen_conf["temperature"]
 
-        msgs = [SystemMessage(content=system), ]
+        msgs = []
+        if system:
+            msgs.append(SystemMessage(content=system))
         for item in history:
             if "role" in item and item["role"] == "assistant":
                 msgs.append(AIMessage(content=item["content"]))
