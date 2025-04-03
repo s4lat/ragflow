@@ -920,14 +920,50 @@
         {
             "name": "Sber",
             "logo": "",
-            "tags": "TEXT EMBEDDING",
+            "tags": "LLM,TEXT EMBEDDING",
             "status": "1",
             "llm": [
                 {
                     "llm_name": "Embeddings",
                     "tags": "TEXT EMBEDDING",
                     "max_tokens": 350,
-                    "model_type": "embedding"
+                    "model_type": "chat"
+                },
+                {
+                    "llm_name": "GigaChat",
+                    "tags": "LLM,CHAT,1024K",
+                    "max_tokens": 8192,
+                    "model_type": "chat"
+                },
+                {
+                    "llm_name": "GigaChat-2",
+                    "tags": "LLM,CHAT,1024K",
+                    "max_tokens": 8192,
+                    "model_type": "chat"
+                },
+                {
+                    "llm_name": "GigaChat-Max",
+                    "tags": "LLM,CHAT,1024K",
+                    "max_tokens": 8192,
+                    "model_type": "chat"
+                },
+                {
+                    "llm_name": "GigaChat-2-Max",
+                    "tags": "LLM,CHAT,1024K",
+                    "max_tokens": 8192,
+                    "model_type": "chat"
+                },
+                {
+                    "llm_name": "GigaChat-Pro",
+                    "tags": "LLM,CHAT,1024K",
+                    "max_tokens": 8192,
+                    "model_type": "chat"
+                },
+                {
+                    "llm_name": "GigaChat-2-Pro",
+                    "tags": "LLM,CHAT,1024K",
+                    "max_tokens": 8192,
+                    "model_type": "chat"
                 }
             ]
         },

@@ -29,6 +29,8 @@ from ollama import Client
 from openai import OpenAI
 from openai.lib.azure import AzureOpenAI
 from zhipuai import ZhipuAI
+from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
+from langchain_gigachat.chat_models import GigaChat
 
 from rag.nlp import is_chinese, is_english
 from rag.utils import num_tokens_from_string
@@ -1333,9 +1335,8 @@ class AnthropicChat(Base):
             del gen_conf["presence_penalty"]
         if "frequency_penalty" in gen_conf:
             del gen_conf["frequency_penalty"]
+
         gen_conf["max_tokens"] = 8192
-        if "haiku" in self.model_name or "opus" in self.model_name:
-            gen_conf["max_tokens"] = 4096
 
         ans = ""
         try:
@@ -1396,6 +1397,36 @@ class AnthropicChat(Base):
             yield ans + "\n**ERROR**: " + str(e)
 
         yield total_tokens
+
+
+class SberGigaChat(Base):
+    def __init__(self, key, model_name, base_url=None):
+        self.giga = GigaChat(model=model_name, credentials=key, verify_ssl_certs=False)
+        self.model_name = model_name
+
+    def chat(self, system, history, gen_conf):
+        if system:
+            self.system = SystemMessage(system)
+
+        if "temperature" in gen_conf and float(gen_conf["temperature"]) >= 0.0:
+            self.giga.temperature = gen_conf["temperature"]
+
+        msgs = [SystemMessage(content=system), ]
+        for item in history:
+            if "role" in item and item["role"] == "assistant":
+                msgs.append(AIMessage(content=item["content"]))
+            elif "role" in item and item["role"] == "user":
+                msgs.append(HumanMessage(content=item["content"]))
+
+        try:
+            resp = self.giga.invoke(msgs)
+
+            return resp.text(), resp.response_metadata["token_usage"]["total_tokens"]
+        except Exception as e:
+            return "\n**ERROR**: " + str(e), 0
+
+    def chat_streamly(self, system, history, gen_conf):
+        raise NotImplementedError
 
 
 class GoogleChat(Base):
