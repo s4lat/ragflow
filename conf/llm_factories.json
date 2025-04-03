@@ -931,38 +931,38 @@
                 },
                 {
                     "llm_name": "GigaChat",
-                    "tags": "LLM,CHAT,1024K",
-                    "max_tokens": 8192,
+                    "tags": "LLM,CHAT,32K",
+                    "max_tokens": 32768,
                     "model_type": "chat"
                 },
                 {
                     "llm_name": "GigaChat-2",
-                    "tags": "LLM,CHAT,1024K",
-                    "max_tokens": 8192,
+                    "tags": "LLM,CHAT,32K",
+                    "max_tokens": 32768,
                     "model_type": "chat"
                 },
                 {
                     "llm_name": "GigaChat-Max",
-                    "tags": "LLM,CHAT,1024K",
-                    "max_tokens": 8192,
+                    "tags": "LLM,CHAT,32K",
+                    "max_tokens": 32768,
                     "model_type": "chat"
                 },
                 {
                     "llm_name": "GigaChat-2-Max",
-                    "tags": "LLM,CHAT,1024K",
-                    "max_tokens": 8192,
+                    "tags": "LLM,CHAT,32K",
+                    "max_tokens": 32768,
                     "model_type": "chat"
                 },
                 {
                     "llm_name": "GigaChat-Pro",
-                    "tags": "LLM,CHAT,1024K",
-                    "max_tokens": 8192,
+                    "tags": "LLM,CHAT,32K",
+                    "max_tokens": 32768,
                     "model_type": "chat"
                 },
                 {
                     "llm_name": "GigaChat-2-Pro",
-                    "tags": "LLM,CHAT,1024K",
-                    "max_tokens": 8192,
+                    "tags": "LLM,CHAT,32K",
+                    "max_tokens": 32768,
                     "model_type": "chat"
                 }
             ]

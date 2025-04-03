@@ -250,7 +250,7 @@ ChatModel = {
     "HuggingFace": HuggingFaceChat,
     "GPUStack": GPUStackChat,
     "ModelScope":ModelScopeChat,
-    "SberGigaChat": SberGigaChat,
+    "Sber": SberGigaChat,
 }
 
 RerankModel = {
