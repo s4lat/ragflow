@@ -34,7 +34,8 @@ from api.db.services.llm_service import LLMBundle, TenantLLMService
 from rag.app.resume import forbidden_select_fields4resume
 from rag.app.tag import label_question
 from rag.nlp.search import index_name
-from rag.prompts import chunks_format, citation_prompt, full_question, kb_prompt, keyword_extraction, llm_id2llm_type, message_fit_in
+from rag.prompts import chunks_format, citation_prompt, full_question, kb_prompt, keyword_extraction, llm_id2llm_type, \
+    message_fit_in, translate_question_en_ru
 from rag.utils import num_tokens_from_string, rmSpace
 from rag.utils.tavily_conn import Tavily
 
@@ -192,6 +193,8 @@ def chat(dialog, messages, stream=True, **kwargs):
             questions[-1] += keyword_extraction(chat_mdl, questions[-1])
             generate_keyword_ts = timer()
 
+        questions[-1] += translate_question_en_ru(chat_mdl, questions[-1])
+
         tenant_ids = list(set([kb.tenant_id for kb in kbs]))
 
         knowledges = []
@@ -209,6 +212,7 @@ def chat(dialog, messages, stream=True, **kwargs):
                 elif stream:
                     yield think
         else:
+            # Получение док из рага
             kbinfos = retriever.retrieval(
                 " ".join(questions),
                 embd_mdl,

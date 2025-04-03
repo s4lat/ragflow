@@ -195,6 +195,31 @@ Requirements:
         return ""
     return kwd
 
+def translate_question_en_ru(chat_mdl, content):
+    prompt = f"""
+Role: You're a translator.
+Task: translate the given piece of text content to English.
+Requirements:
+  - Only translated text in output;
+  - If text already in english, then translate it to Russian.
+
+### Text Content
+{content}
+
+"""
+    msg = [
+        {"role": "system", "content": prompt},
+        {"role": "user", "content": "Output: "}
+    ]
+    _, msg = message_fit_in(msg, chat_mdl.max_length)
+    translated_text = chat_mdl.chat(prompt, msg[1:], {"temperature": 0.2})
+    if isinstance(translated_text, tuple):
+        translated_text = translated_text[0]
+    translated_text = re.sub(r"<think>.*</think>", "", translated_text, flags=re.DOTALL)
+    if translated_text.find("**ERROR**") >= 0:
+        return ""
+    return translated_text
+
 
 def question_proposal(chat_mdl, content, topn=3):
     prompt = f"""
