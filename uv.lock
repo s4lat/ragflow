@@ -2,9 +2,12 @@ version = 1
 revision = 1
 requires-python = ">=3.10, <3.13"
 resolution-markers = [
-    "python_full_version >= '3.12' and sys_platform == 'darwin'",
-    "python_full_version >= '3.12' and platform_machine == 'aarch64' and sys_platform == 'linux'",
-    "(python_full_version >= '3.12' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version >= '3.12' and sys_platform != 'darwin' and sys_platform != 'linux')",
+    "python_full_version >= '3.12.4' and sys_platform == 'darwin'",
+    "python_full_version >= '3.12' and python_full_version < '3.12.4' and sys_platform == 'darwin'",
+    "python_full_version >= '3.12.4' and platform_machine == 'aarch64' and sys_platform == 'linux'",
+    "python_full_version >= '3.12' and python_full_version < '3.12.4' and platform_machine == 'aarch64' and sys_platform == 'linux'",
+    "(python_full_version >= '3.12.4' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version >= '3.12.4' and sys_platform != 'darwin' and sys_platform != 'linux')",
+    "(python_full_version >= '3.12' and python_full_version < '3.12.4' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version >= '3.12' and python_full_version < '3.12.4' and sys_platform != 'darwin' and sys_platform != 'linux')",
     "python_full_version == '3.11.*' and sys_platform == 'darwin'",
     "python_full_version == '3.11.*' and platform_machine == 'aarch64' and sys_platform == 'linux'",
     "(python_full_version == '3.11.*' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version == '3.11.*' and sys_platform != 'darwin' and sys_platform != 'linux')",
@@ -150,7 +153,7 @@ wheels = [
 
 [[package]]
 name = "akshare"
-version = "1.16.60"
+version = "1.16.71"
 source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
 dependencies = [
     { name = "aiohttp" },
@@ -171,9 +174,9 @@ dependencies = [
     { name = "urllib3" },
     { name = "xlrd" },
 ]
-sdist = { url = "https://mirrors.aliyun.com/pypi/packages/46/0a/cd9dacaec5b437fd10a21f022c90e055adade935375d47230b2e6ae6b609/akshare-1.16.60.tar.gz", hash = "sha256:f7ce998316954e64c737d99da2afb37275f94f6447d4bb9af83691b135b12c81" }
+sdist = { url = "https://mirrors.aliyun.com/pypi/packages/b2/f2/888d8191d920692659a3d412403a79b9b9cf80be86b9069c27f02a967c76/akshare-1.16.71.tar.gz", hash = "sha256:66b436537fbfc807735cf015ae1fb9c99b21fc3168090464747b9bdb71b3fe69" }
 wheels = [
-    { url = "https://mirrors.aliyun.com/pypi/packages/67/a9/dcd31299b4eb4d098148aef115e104d20d3d38dd36b0336510f44635c533/akshare-1.16.60-py3-none-any.whl", hash = "sha256:d8a5c8611dbffc0deddce7b2c3fdb168f0cd053fc0ebc5f0a4ac775c539db9d2" },
+    { url = "https://mirrors.aliyun.com/pypi/packages/c9/d0/b113e8f88ed24e823f976ee8a40d6d3c22ae46cd419c8d2a9c67210b957b/akshare-1.16.71-py3-none-any.whl", hash = "sha256:b12d139624cd56fdd5463ac33ee900a458f189165995eec2ca368762012d226e" },
 ]
 
 [[package]]
@@ -1713,6 +1716,19 @@ wheels = [
 ]
 
 [[package]]
+name = "gigachat"
+version = "0.1.39.post1"
+source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
+dependencies = [
+    { name = "httpx" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://mirrors.aliyun.com/pypi/packages/46/08/0af29564a79f9ed660e4928e3641b9bc042fcf0a2fc4bf3234f7e1cd94c9/gigachat-0.1.39.post1.tar.gz", hash = "sha256:5d7d14c3340e72c24f09ba0755324a3937da6ee45b5ce9f7aab4d4037b050db6" }
+wheels = [
+    { url = "https://mirrors.aliyun.com/pypi/packages/68/63/8b74e70b7b9496dc72b4f551b0ee12aacaa2a871a1d6cf60830a2e0df78f/gigachat-0.1.39.post1-py3-none-any.whl", hash = "sha256:7b60d9ce08d874b118f55ebe18b8ff0c7fa53ae2437d07a86a714773ea7bb212" },
+]
+
+[[package]]
 name = "google"
 version = "3.0.0"
 source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
@@ -2598,10 +2614,31 @@ wheels = [
 ]
 
 [[package]]
+name = "jsonpatch"
+version = "1.33"
+source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
+dependencies = [
+    { name = "jsonpointer" },
+]
+sdist = { url = "https://mirrors.aliyun.com/pypi/packages/42/78/18813351fe5d63acad16aec57f94ec2b70a09e53ca98145589e185423873/jsonpatch-1.33.tar.gz", hash = "sha256:9fcd4009c41e6d12348b4a0ff2563ba56a2923a7dfee731d004e212e1ee5030c" }
+wheels = [
+    { url = "https://mirrors.aliyun.com/pypi/packages/73/07/02e16ed01e04a374e644b575638ec7987ae846d25ad97bcc9945a3ee4b0e/jsonpatch-1.33-py2.py3-none-any.whl", hash = "sha256:0ae28c0cd062bbd8b8ecc26d7d164fbbea9652a1a3693f3b956c1eae5145dade" },
+]
+
+[[package]]
 name = "jsonpath"
 version = "0.82.2"
 source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
 sdist = { url = "https://mirrors.aliyun.com/pypi/packages/cf/a1/693351acd0a9edca4de9153372a65e75398898ea7f8a5c722ab00f464929/jsonpath-0.82.2.tar.gz", hash = "sha256:d87ef2bcbcded68ee96bc34c1809b69457ecec9b0c4dd471658a12bd391002d1" }
+
+[[package]]
+name = "jsonpointer"
+version = "3.0.0"
+source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
+sdist = { url = "https://mirrors.aliyun.com/pypi/packages/6a/0a/eebeb1fa92507ea94016a2a790b93c2ae41a7e18778f85471dc54475ed25/jsonpointer-3.0.0.tar.gz", hash = "sha256:2b2d729f2091522d61c3b31f82e11870f60b68f43fbc705cb76bf4b832af59ef" }
+wheels = [
+    { url = "https://mirrors.aliyun.com/pypi/packages/71/92/5e77f98553e9e75130c78900d000368476aed74276eb8ae8796f65f00918/jsonpointer-3.0.0-py2.py3-none-any.whl", hash = "sha256:13e088adc14fca8b6aa8177c044e12701e6ad4b28ff10e65f2267a90109c9942" },
+]
 
 [[package]]
 name = "jsonschema"
@@ -2699,6 +2736,38 @@ wheels = [
 ]
 
 [[package]]
+name = "langchain-core"
+version = "0.3.50"
+source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
+dependencies = [
+    { name = "jsonpatch" },
+    { name = "langsmith" },
+    { name = "packaging" },
+    { name = "pydantic" },
+    { name = "pyyaml" },
+    { name = "tenacity" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://mirrors.aliyun.com/pypi/packages/eb/af/19315212ba44db8062a394bc3a44de72292e8df11802e8b6d341eee20149/langchain_core-0.3.50.tar.gz", hash = "sha256:8e141b89f2be6020e94c32d7d5141fc6eb5acf1e04e4d80ebd2c74bf30de9f77" }
+wheels = [
+    { url = "https://mirrors.aliyun.com/pypi/packages/01/78/39209de2ccc45a18e4bfa644a9846ec72831b464172b27dee156a622b599/langchain_core-0.3.50-py3-none-any.whl", hash = "sha256:76b7ff99125d160427801ea47c4b5202363856603e8382208a889fdd914d7d4d" },
+]
+
+[[package]]
+name = "langchain-gigachat"
+version = "0.3.9"
+source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
+dependencies = [
+    { name = "gigachat" },
+    { name = "langchain-core" },
+    { name = "types-requests" },
+]
+sdist = { url = "https://mirrors.aliyun.com/pypi/packages/1d/e6/77b6d78809874d05476e46049eecc9bced016e031ddfaad7aab06bde1807/langchain_gigachat-0.3.9.tar.gz", hash = "sha256:ee5602c43c05beecb992f4351a839d1be600ee57debcfb6c0a7985fe748886c4" }
+wheels = [
+    { url = "https://mirrors.aliyun.com/pypi/packages/50/01/22174185b7cec28869204bb0aaf8913258466582cae8fc597fef60df7f59/langchain_gigachat-0.3.9-py3-none-any.whl", hash = "sha256:d5605300aae68621e1c9871be71c94e801f127a61c18abf91701f2fadb8ce42f" },
+]
+
+[[package]]
 name = "langfuse"
 version = "2.60.1"
 source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
@@ -2715,6 +2784,24 @@ dependencies = [
 sdist = { url = "https://mirrors.aliyun.com/pypi/packages/ee/03/0eb9cb8abe4ea7f77636e6fe06361c8bbc43b2e4eed51750d4bc792dff0b/langfuse-2.60.1.tar.gz", hash = "sha256:9801337b35d992630b4a15be20b7926d5abc114023260f1fb7151715f524fb91" }
 wheels = [
     { url = "https://mirrors.aliyun.com/pypi/packages/41/d1/8b61f332f37b89770ef93ebbf8649ce2ae1c07d5f2acba5c15ea1a7dcf6c/langfuse-2.60.1-py3-none-any.whl", hash = "sha256:0147c0b74a88c57fb73f486cc9ab0c30aacd30963fefa23723611274c3fda900" },
+]
+
+[[package]]
+name = "langsmith"
+version = "0.3.23"
+source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
+dependencies = [
+    { name = "httpx" },
+    { name = "orjson", marker = "platform_python_implementation != 'PyPy'" },
+    { name = "packaging" },
+    { name = "pydantic" },
+    { name = "requests" },
+    { name = "requests-toolbelt" },
+    { name = "zstandard" },
+]
+sdist = { url = "https://mirrors.aliyun.com/pypi/packages/bf/d9/34d78d0afe9545d25ec9bbe276d7ea73af320d6b91cac59b84a3e7be0784/langsmith-0.3.23.tar.gz", hash = "sha256:d0a1807b62158c98e69b4c250d25b68fe3464a09c780ed4b2b597cd659d0164e" }
+wheels = [
+    { url = "https://mirrors.aliyun.com/pypi/packages/b6/7c/de5bc6486d1116097c0b3b7fc89322ddf7854d07899daf2086047a8c26a0/langsmith-0.3.23-py3-none-any.whl", hash = "sha256:c195868b42a6fc78e6d1dca760f674eb8bc9e8bf5c7cd417703edb5317bf1139" },
 ]
 
 [[package]]
@@ -4794,6 +4881,7 @@ dependencies = [
     { name = "infinity-sdk" },
     { name = "itsdangerous" },
     { name = "json-repair" },
+    { name = "langchain-gigachat" },
     { name = "langfuse" },
     { name = "markdown" },
     { name = "markdown-to-json" },
@@ -4929,6 +5017,7 @@ requires-dist = [
     { name = "infinity-sdk", specifier = "==0.6.0.dev3" },
     { name = "itsdangerous", specifier = "==2.1.2" },
     { name = "json-repair", specifier = "==0.35.0" },
+    { name = "langchain-gigachat", specifier = ">=0.3.9" },
     { name = "langfuse", specifier = ">=2.60.0" },
     { name = "markdown", specifier = "==3.6" },
     { name = "markdown-to-json", specifier = "==2.1.1" },
@@ -5156,6 +5245,18 @@ wheels = [
 [package.optional-dependencies]
 socks = [
     { name = "pysocks" },
+]
+
+[[package]]
+name = "requests-toolbelt"
+version = "1.0.0"
+source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
+dependencies = [
+    { name = "requests" },
+]
+sdist = { url = "https://mirrors.aliyun.com/pypi/packages/f3/61/d7545dafb7ac2230c70d38d31cbfe4cc64f7144dc41f6e4e4b78ecd9f5bb/requests-toolbelt-1.0.0.tar.gz", hash = "sha256:7681a0a3d047012b5bdc0ee37d7f8f07ebe76ab08caeccfc3921ce23c88d5bc6" }
+wheels = [
+    { url = "https://mirrors.aliyun.com/pypi/packages/3f/51/d4db610ef29373b879047326cbf6fa98b6c1969d6f6dc423279de2b1be2c/requests_toolbelt-1.0.0-py2.py3-none-any.whl", hash = "sha256:cccfdd665f0a24fcf4726e690f65639d272bb0637b9b92dfd91a5568ccf6bd06" },
 ]
 
 [[package]]
@@ -5668,9 +5769,12 @@ name = "sphinx"
 version = "8.2.3"
 source = { registry = "https://mirrors.aliyun.com/pypi/simple" }
 resolution-markers = [
-    "python_full_version >= '3.12' and sys_platform == 'darwin'",
-    "python_full_version >= '3.12' and platform_machine == 'aarch64' and sys_platform == 'linux'",
-    "(python_full_version >= '3.12' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version >= '3.12' and sys_platform != 'darwin' and sys_platform != 'linux')",
+    "python_full_version >= '3.12.4' and sys_platform == 'darwin'",
+    "python_full_version >= '3.12' and python_full_version < '3.12.4' and sys_platform == 'darwin'",
+    "python_full_version >= '3.12.4' and platform_machine == 'aarch64' and sys_platform == 'linux'",
+    "python_full_version >= '3.12' and python_full_version < '3.12.4' and platform_machine == 'aarch64' and sys_platform == 'linux'",
+    "(python_full_version >= '3.12.4' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version >= '3.12.4' and sys_platform != 'darwin' and sys_platform != 'linux')",
+    "(python_full_version >= '3.12' and python_full_version < '3.12.4' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version >= '3.12' and python_full_version < '3.12.4' and sys_platform != 'darwin' and sys_platform != 'linux')",
     "python_full_version == '3.11.*' and sys_platform == 'darwin'",
     "python_full_version == '3.11.*' and platform_machine == 'aarch64' and sys_platform == 'linux'",
     "(python_full_version == '3.11.*' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version == '3.11.*' and sys_platform != 'darwin' and sys_platform != 'linux')",
