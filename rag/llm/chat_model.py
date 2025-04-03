@@ -1425,7 +1425,25 @@ class SberGigaChat(Base):
             return "\n**ERROR**: " + str(e), 0
 
     def chat_streamly(self, system, history, gen_conf):
-        raise NotImplementedError
+        if "temperature" in gen_conf and float(gen_conf["temperature"]):
+            self.giga.temperature = gen_conf["temperature"]
+
+        msgs = []
+        if system:
+            msgs.append(SystemMessage(content=system))
+        for item in history:
+            if "role" in item and item["role"] == "assistant":
+                msgs.append(AIMessage(content=item["content"]))
+            elif "role" in item and item["role"] == "user":
+                msgs.append(HumanMessage(content=item["content"]))
+
+
+        try:
+            for chunk in self.giga.stream(msgs):
+                yield chunk.text()
+            yield 0
+        except Exception as e:
+            yield "\n**ERROR**: " + str(e), 0
 
 
 class GoogleChat(Base):
