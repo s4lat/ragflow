@@ -633,15 +633,19 @@ class SberEmbed(Base):
         return np.array(em_batch_result[0]), tokens_count
 
 class GeminiEmbed(Base):
-    def __init__(self, key, model_name='models/text-embedding-004',
-                 **kwargs):
+    def __init__(self, key, model_name='models/text-embedding-004', base_url=None):
         self.key = key
+        self.proxy = base_url
         self.model_name = 'models/' + model_name
         
     def encode(self, texts: list):
+        if self.proxy:
+            os.putenv("grpc_proxy", self.proxy)
+
         texts = [truncate(t, 2048) for t in texts]
         token_count = sum(num_tokens_from_string(text) for text in texts)
         genai.configure(api_key=self.key)
+
         batch_size = 16
         ress = []
         for i in range(0, len(texts), batch_size):
@@ -659,7 +663,8 @@ class GeminiEmbed(Base):
             model=self.model_name,
             content=truncate(text,2048),
             task_type="retrieval_document",
-            title="Embedding of single string")
+            title="Embedding of single string",
+        )
         token_count = num_tokens_from_string(text)
         return np.array(result['embedding']), token_count
 
