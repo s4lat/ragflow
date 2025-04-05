@@ -36,7 +36,7 @@ class Vectorizer(object):
         if len(texts) == 0:
             return []
         logger.debug("texts number came is " + str(len(texts)))
-        encoded_input = self.tokenizer(texts, padding=True, truncation=True, max_length=1024,
+        encoded_input = self.tokenizer(texts, padding=True, truncation=True, max_length=512,
                                        return_tensors='pt').to(self.device)
         with torch.no_grad():
             model_output = self.model(**encoded_input)
