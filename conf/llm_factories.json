@@ -1031,6 +1031,12 @@
                     "tags": "TEXT EMBEDDING",
                     "max_tokens": 2048,
                     "model_type": "embedding"
+                },
+                {
+                    "llm_name": "text-multilingual-embedding-002",
+                    "tags": "TEXT EMBEDDING",
+                    "max_tokens": 2048,
+                    "model_type": "embedding"
                 }
             ]
         },
