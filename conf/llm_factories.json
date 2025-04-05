@@ -1033,7 +1033,7 @@
                     "model_type": "embedding"
                 },
                 {
-                    "llm_name": "text-multilingual-embedding-002",
+                    "llm_name": "gemini-embedding-exp-03-07",
                     "tags": "TEXT EMBEDDING",
                     "max_tokens": 2048,
                     "model_type": "embedding"
